@@ -48,8 +48,7 @@ var score = 85
 var str = "Your score was\(score)"
  
  
-
-//Anotaciones, es decir puedes especificar el tipo de datos que quieres
+//Anotaciones, especificar el tipo de datos que quieres
 
 let message1 = "Hello, playground"
 let album: String = "Reputation"
