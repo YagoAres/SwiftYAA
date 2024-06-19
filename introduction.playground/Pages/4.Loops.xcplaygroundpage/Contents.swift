@@ -71,3 +71,49 @@ while countDown >= 0 {
     
     countDown -= 1
 }
+
+//5. EXITING MULTIPLE LOOP'S (
+//Si se coloca un bucle dentro de otro bucle se llama bucle anindado, por ejemplo
+for i in 1...10 {
+    for j in 1...10{
+        let product = i * j
+        print ("\(i) * \(j) is \(product)")
+    }
+}
+
+//Si quisiéramos salir a mitad de camino, tendríamos que hacer dos cosas. Primero, le damos una etiqueta al bucle exterior. Después agrega nuestra condición dentro del bucle interno, luego úsala break outerLoop para salir de ambos bucles al mismo tiempo:
+outerLoop: for i in 1...10 { //Un for de 1 al 10
+    for j in 1...10 {
+        let product = i * j //Se hace el producto
+        print ("\(i) * \(j) is \(product)")
+
+        if product == 50 { //Si el producto llega a 50
+            print("It's a bullseye!")
+        break outerLoop //Y se terminas el bucle con el break, porque si no continuaría ejecutándose con los números restantes, es decir del 6 al 10
+        }
+    }
+}
+
+// 6. SKIPPING ITEMS
+//Como has visto, el break sale de un bucle. Pero si solo desea omitir el elemento actual y continuar con el siguiente, debe usar continue en su lugar
+for i in 1...10 {
+    if i % 2 == 1 {
+        continue
+    }
+
+    print(i)
+}
+
+//El operador restante calcula cuántas veces cabe 2 en cada número en nuestro ciclo y luego devuelve lo que sobra. Entonces, si sobra 1, significa que el número es impar, por lo que podemos usar continuepara omitirlo.
+
+// 7. BUCLES INFINITOS
+var counter = 0
+
+while true { //Como esto siempre se cumple, se ejecutara infinitamente
+    print(" ")
+    counter += 1
+
+    if counter == 273 {
+        break
+    }
+}
