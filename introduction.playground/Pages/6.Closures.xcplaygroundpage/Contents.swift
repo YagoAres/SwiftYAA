@@ -46,10 +46,10 @@ func travel(action: () -> Void) {
 //Y ahora podemos llamar a nuestra función
 travel(action: driving)
 
-//5. TRAILING CLSURE SYNTAX
+//5. TRAILING CLOSURE SYNTAX
 //Si el último parámetro de una función es un cierre, Swift le permite usar una sintaxis especial llamada sintaxis de cierre final
 
-//Para demostrar esto, aquí está nuestra travel()función nuevamente. Acepta un actioncierre para que pueda ejecutarse entre dos print()llamadas:
+//Para demostrar esto, aquí está nuestra travel()función nuevamente. Acepta un action cierre para que pueda ejecutarse entre dos print()llamadas:
 func travel2(action: () -> Void) {
     print("I'm getting ready to go.")
     action()
@@ -58,4 +58,46 @@ func travel2(action: () -> Void) {
 
 travel2() {
     print("I'm driving in my car")
+}
+
+//6. USING CLUSURES AS PARAMETERS WHEN THEY ACCEPT PARAMETERS
+
+func travel3(action: (String) -> Void) {
+    print("I'm getting ready to go.")
+    action("London")
+    print("I arrived!")
+}
+
+travel3 { (place: String) in
+    print("I'm going to \(place) in my car")
+}
+
+//7. USING CLOSURES AS PARAMETERS WHEN THEY RETURN VALUES
+
+func travel4(action: (String) -> String) {
+    print("I'm getting ready to go.")
+    let description = action("London")
+    print(description)
+    print("I arrived!")
+}
+
+travel4 { (place: String) -> String in
+    return "I'm going to \(place) in my car"
+}
+
+//8. SHORTHAND PARAMETERS NAMES
+
+func travel5(action: (String) -> String) {
+    print("I'm getting ready to go.")
+    let description = action("London")
+    print(description)
+    print("I arrived!")
+}
+
+travel5 { (place: String) -> String in
+    return "I'm going to \(place) in my car"
+}
+ //Pero swift sabe que esa clausula debe ser un string, por tanto se peude quitar
+travel5 { place in
+    return "I'm going to \(place) in my car"
 }
