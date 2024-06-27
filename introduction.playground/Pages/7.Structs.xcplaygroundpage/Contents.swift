@@ -121,5 +121,112 @@ print(toys.sorted()) //Ordenar alfabeticamente
 
 toys.remove(at: 0) //Eliminar un elemento de la matriz, en este caso el que opcupa la posición 0
 
+//8.INITIALIZERS
 
+//Son métodos especiales que proporcioan diferentes formas de crear su estructura
+//Cuando creamos una estructura, esta tiene un propiedad
+struct User {
+    var username: String
+}
 
+//Y cuando la creamos, proporcionamos un nombre de usuario
+var user = User(username: "yagoares")
+
+//Pero también podemos proporcionar nuestro propio inicializador para remplazar el predeterminado, por ejemplo
+struct User1 {
+    var username: String
+    init(){
+        username = "Anonymous"
+        print("Creating a user")
+    }
+}
+
+var user1 = User1()
+user1.username = "twostraws"
+
+ //9. SELF
+//Dentro de los métodos obitenes una constantes especial llamada self, que apunta a cualquier instancia de la estructura que se esté utilizando actualmente, por ejemplo
+
+struct Person2 {
+    var name: String
+    
+    init(name: String){
+        print("\(name) was born!")
+        self.name = name //self ayuda a distinguir entre la propiedad y el parámetro, self.name se refiere a la propiedad y name se refiere al parámetro
+    }
+}
+
+//10. LAZY PROPERTIES
+// Swift permite crear alguna propiedad solo cuando es necesaria, por ejemplo
+
+struct FamilyTree {
+    init(){
+       print("Creating")
+    }
+}
+
+struct Person3 {
+    var name: String
+    var familyTree = FamilyTree()
+    
+    init(name: String) {
+        self.name = name
+    }
+}
+
+var ed = Person3(name: "Ed")
+
+//Pero si no necesitamos en ese caso familytree podemos usar lazy
+
+//lazy var familyTree = FamilyTree()
+//ed.familyTree
+
+//11. STATIC PROPERTIES AND METHODS
+//En swift tambiñen podemos compartir porpiedades y métodos en todas las instancias de la estructura delcarandolas como static
+struct Student {
+    static var classSize = 0
+    var name: String
+
+    init(name: String) {
+        self.name = name
+        Student.classSize += 1
+    }
+}
+
+print(Student.classSize)
+
+//12. ACCESS CONTROL
+//El control de acceso le permite restringir qué código puede usar propiedades y métodos. Esto es importante porque es posible que desee evitar que la gente lea una propiedad directamente, por ejemplo.
+struct Person4 {
+    var id: String
+
+    init(id: String) {
+        self.id = id
+    }
+}
+
+let edi = Person4(id: "12345")
+
+//Una vez que se haya creado esa persona, podemos hacer idque sea privada para que no pueda leerla desde fuera de la estructura; intentar escribirla edi.idsimplemente no funcionará
+struct Person5 {
+    private var id: String
+
+    init(id: String) {
+        self.id = id
+    }
+}
+
+//Person5.id
+
+//Solo los métodos internos Person pueden leer el id. Por ejemplo
+struct Person6 {
+    private var id: String
+
+    init(id: String) {
+        self.id = id
+    }
+
+    func identify() -> String {
+        return "My social security number is \(id)"
+    }
+}
